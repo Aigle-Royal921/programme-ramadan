@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programme Ramadan — 16 Jours</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --bg: #0A0A0F;
+    --surface: #12121A;
+    --surface2: #1A1A26;
+    --text: #F0EDE6;
+    --muted: #7A7A8C;
+    --accent: #8B6FD4;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Background */
+body::before {
+content: ‘’;
+position: fixed;
+top: -50%;
+left: -20%;
+width: 70%;
+height: 70%;
+background: radial-gradient(ellipse, rgba(201,168,76,0.06) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
+}
+body::after {
+content: ‘’;
+position: fixed;
+bottom: -30%;
+right: -10%;
+width: 50%;
+height: 60%;
+background: radial-gradient(ellipse, rgba(139,111,212,0.06) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
+}
+
+/* Header */
+header {
+position: relative;
+z-index: 1;
+text-align: center;
+padding: 60px 24px 40px;
+border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.crescent {
+font-size: 48px;
+display: block;
+margin-bottom: 16px;
+animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+0%, 100% { filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
+50% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.8)); }
+}
+
+header h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(28px, 5vw, 52px);
+font-weight: 700;
+background: linear-gradient(135deg, var(–gold-light), var(–gold), #A07830);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1.1;
+margin-bottom: 12px;
+}
+
+header p {
+color: var(–muted);
+font-size: 15px;
+letter-spacing: 2px;
+text-transform: uppercase;
+font-weight: 300;
+}
+
+.badge {
+display: inline-block;
+margin-top: 20px;
+background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+border: 1px solid rgba(201,168,76,0.3);
+border-radius: 50px;
+padding: 8px 24px;
+font-size: 13px;
+color: var(–gold-light);
+letter-spacing: 1px;
+}
+
+/* Tabs */
+.tabs {
+position: sticky;
+top: 0;
+z-index: 100;
+display: flex;
+gap: 4px;
+padding: 16px 24px;
+background: rgba(10,10,15,0.95);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid rgba(255,255,255,0.05);
+overflow-x: auto;
+scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+flex-shrink: 0;
+background: transparent;
+border: 1px solid transparent;
+color: var(–muted);
+padding: 10px 20px;
+border-radius: 8px;
+cursor: pointer;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 14px;
+font-weight: 400;
+transition: all 0.3s ease;
+letter-spacing: 0.5px;
+}
+
+.tab-btn:hover {
+color: var(–text);
+border-color: rgba(201,168,76,0.2);
+}
+
+.tab-btn.active {
+background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
+border-color: rgba(201,168,76,0.4);
+color: var(–gold-light);
+}
+
+/* Content */
+.content {
+position: relative;
+z-index: 1;
+max-width: 900px;
+margin: 0 auto;
+padding: 40px 24px 80px;
+}
+
+.tab-content { display: none; }
+.tab-content.active {
+display: block;
+animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Title */
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 28px;
+color: var(–gold-light);
+margin-bottom: 8px;
+}
+
+.section-sub {
+color: var(–muted);
+font-size: 14px;
+margin-bottom: 32px;
+line-height: 1.6;
+}
+
+/* Schedule */
+.schedule-grid {
+display: grid;
+gap: 12px;
+}
+
+.day-card {
+background: var(–surface);
+border: 1px solid rgba(255,255,255,0.05);
+border-radius: 16px;
+padding: 20px 24px;
+display: flex;
+align-items: center;
+gap: 20px;
+transition: all 0.3s ease;
+cursor: default;
+}
+
+.day-card:hover {
+border-color: rgba(201,168,76,0.2);
+background: var(–surface2);
+transform: translateX(4px);
+}
+
+.day-card.rest {
+opacity: 0.5;
+}
+
+.day-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 32px;
+color: var(–gold);
+min-width: 56px;
+font-weight: 700;
+}
+
+.day-info { flex: 1; }
+
+.day-label {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: var(–muted);
+margin-bottom: 4px;
+}
+
+.day-title {
+font-size: 17px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 4px;
+}
+
+.day-focus {
+font-size: 13px;
+color: var(–gold-light);
+}
+
+.day-tag {
+padding: 6px 14px;
+border-radius: 50px;
+font-size: 12px;
+font-weight: 500;
+white-space: nowrap;
+}
+
+.tag-train {
+background: rgba(201,168,76,0.12);
+border: 1px solid rgba(201,168,76,0.25);
+color: var(–gold-light);
+}
+
+.tag-rest {
+background: rgba(122,122,140,0.1);
+border: 1px solid rgba(122,122,140,0.2);
+color: var(–muted);
+}
+
+/* Workout details */
+.workout-section {
+margin-bottom: 40px;
+}
+
+.workout-header {
+display: flex;
+align-items: center;
+gap: 16px;
+margin-bottom: 20px;
+}
+
+.workout-icon {
+width: 50px;
+height: 50px;
+border-radius: 14px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 22px;
+background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
+border: 1px solid rgba(201,168,76,0.2);
+flex-shrink: 0;
+}
+
+.workout-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+color: var(–gold-light);
+}
+
+.workout-meta {
+font-size: 13px;
+color: var(–muted);
+margin-top: 2px;
+}
+
+.exercise-list {
+display: grid;
+gap: 10px;
+}
+
+.exercise-item {
+background: var(–surface);
+border: 1px solid rgba(255,255,255,0.05);
+border-radius: 12px;
+padding: 16px 20px;
+display: grid;
+grid-template-columns: 1fr auto;
+align-items: center;
+gap: 16px;
+transition: border-color 0.3s;
+}
+
+.exercise-item:hover {
+border-color: rgba(201,168,76,0.15);
+}
+
+.exercise-name {
+font-size: 15px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 3px;
+}
+
+.exercise-tip {
+font-size: 12px;
+color: var(–muted);
+}
+
+.exercise-sets {
+text-align: right;
+}
+
+.sets-main {
+font-size: 15px;
+font-weight: 500;
+color: var(–gold);
+}
+
+.sets-rest {
+font-size: 11px;
+color: var(–muted);
+margin-top: 2px;
+}
+
+/* Divider */
+.divider {
+height: 1px;
+background: linear-gradient(to right, transparent, rgba(201,168,76,0.2), transparent);
+margin: 32px 0;
+}
+
+/* Nutrition */
+.meal-timeline {
+position: relative;
+padding-left: 32px;
+}
+
+.meal-timeline::before {
+content: ‘’;
+position: absolute;
+left: 10px;
+top: 0;
+bottom: 0;
+width: 1px;
+background: linear-gradient(to bottom, var(–gold), var(–accent), var(–gold));
+opacity: 0.3;
+}
+
+.meal-block {
+position: relative;
+margin-bottom: 28px;
+}
+
+.meal-block::before {
+content: ‘’;
+position: absolute;
+left: -26px;
+top: 8px;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: var(–gold);
+border: 2px solid var(–bg);
+box-shadow: 0 0 8px rgba(201,168,76,0.5);
+}
+
+.meal-time {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: var(–gold);
+margin-bottom: 6px;
+}
+
+.meal-name {
+font-family: ‘Playfair Display’, serif;
+font-size: 20px;
+color: var(–text);
+margin-bottom: 12px;
+}
+
+.meal-card {
+background: var(–surface);
+border: 1px solid rgba(255,255,255,0.05);
+border-radius: 14px;
+padding: 20px;
+}
+
+.food-list {
+list-style: none;
+display: grid;
+gap: 8px;
+}
+
+.food-list li {
+font-size: 14px;
+color: var(–muted);
+display: flex;
+align-items: flex-start;
+gap: 10px;
+line-height: 1.5;
+}
+
+.food-list li::before {
+content: ‘◆’;
+color: var(–gold);
+font-size: 8px;
+margin-top: 5px;
+flex-shrink: 0;
+}
+
+.food-list li strong {
+color: var(–text);
+font-weight: 500;
+}
+
+/* Macros */
+.macros-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 12px;
+margin-top: 16px;
+}
+
+.macro-box {
+background: rgba(201,168,76,0.05);
+border: 1px solid rgba(201,168,76,0.15);
+border-radius: 12px;
+padding: 14px;
+text-align: center;
+}
+
+.macro-val {
+font-family: ‘Playfair Display’, serif;
+font-size: 24px;
+color: var(–gold-light);
+font-weight: 700;
+}
+
+.macro-label {
+font-size: 11px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-top: 4px;
+}
+
+/* Tips */
+.tips-grid {
+display: grid;
+gap: 16px;
+}
+
+.tip-card {
+background: var(–surface);
+border: 1px solid rgba(255,255,255,0.05);
+border-radius: 16px;
+padding: 22px 24px;
+display: flex;
+gap: 18px;
+align-items: flex-start;
+transition: border-color 0.3s;
+}
+
+.tip-card:hover {
+border-color: rgba(201,168,76,0.2);
+}
+
+.tip-emoji {
+font-size: 28px;
+flex-shrink: 0;
+}
+
+.tip-title {
+font-size: 16px;
+font-weight: 500;
+color: var(–text);
+margin-bottom: 6px;
+}
+
+.tip-text {
+font-size: 14px;
+color: var(–muted);
+line-height: 1.65;
+}
+
+/* Progress */
+.progress-section {
+background: var(–surface);
+border: 1px solid rgba(201,168,76,0.15);
+border-radius: 20px;
+padding: 28px;
+margin-bottom: 24px;
+}
+
+.week-label {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px;
+color: var(–gold-light);
+margin-bottom: 16px;
+}
+
+.days-dots {
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+gap: 8px;
+}
+
+.dot-item {
+text-align: center;
+}
+
+.dot {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 12px;
+margin: 0 auto 6px;
+font-weight: 500;
+}
+
+.dot.train-day {
+background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(201,168,76,0.1));
+border: 1px solid rgba(201,168,76,0.4);
+color: var(–gold-light);
+}
+
+.dot.rest-day {
+background: rgba(122,122,140,0.08);
+border: 1px solid rgba(122,122,140,0.15);
+color: var(–muted);
+}
+
+.dot-label {
+font-size: 10px;
+color: var(–muted);
+}
+
+/* Alert */
+.alert {
+background: linear-gradient(135deg, rgba(139,111,212,0.1), rgba(139,111,212,0.03));
+border: 1px solid rgba(139,111,212,0.25);
+border-radius: 14px;
+padding: 18px 22px;
+margin-bottom: 24px;
+display: flex;
+gap: 14px;
+align-items: flex-start;
+}
+
+.alert-icon { font-size: 20px; flex-shrink: 0; }
+
+.alert-text {
+font-size: 14px;
+color: #B4A8D8;
+line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+.day-card { flex-wrap: wrap; }
+.macros-grid { grid-template-columns: 1fr; }
+.days-dots { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <span class="crescent">🌙</span>
+  <h1>Programme Ramadan<br><em style="font-style:italic;font-size:0.75em">Ventre & Bas du Corps</em></h1>
+  <p>Femme · Perte de gras · Galbe musculaire</p>
+  <div class="badge">✦ 16 jours restants · Entraînement après Iftar ✦</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" onclick="showTab('planning')">📅 Planning</button>
+  <button class="tab-btn" onclick="showTab('workouts')">💪 Séances</button>
+  <button class="tab-btn" onclick="showTab('nutrition')">🍽 Nutrition</button>
+  <button class="tab-btn" onclick="showTab('conseils')">✨ Conseils</button>
+</nav>
+
+<div class="content">
+
+  <!-- PLANNING -->
+
+  <div id="planning" class="tab-content active">
+    <h2 class="section-title">Planning 16 Jours</h2>
+    <p class="section-sub">4 séances par semaine · repos stratégique · entraînement idéalement 1h30 après l'Iftar.</p>
+
+```
+<div class="alert">
+  <span class="alert-icon">💡</span>
+  <span class="alert-text"><strong style="color:#c9b8f0">Meilleur moment pour s'entraîner :</strong> 1h à 2h après l'Iftar. Le corps est ré-hydraté et nourri, idéal pour une performance optimale sans fatigue excessive.</span>
+</div>
+
+<div class="schedule-grid" id="schedule"></div>
+```
+
+  </div>
+
+  <!-- WORKOUTS -->
+
+  <div id="workouts" class="tab-content">
+    <h2 class="section-title">Les 4 Séances</h2>
+    <p class="section-sub">Chaque séance dure 35–45 min. Priorisez la forme sur le poids. Buvez de l'eau entre chaque exercice.</p>
+
+```
+<!-- Séance A -->
+<div class="workout-section">
+  <div class="workout-header">
+    <div class="workout-icon">🍑</div>
+    <div>
+      <div class="workout-title">Séance A — Fessiers & Ischio-jambiers</div>
+      <div class="workout-meta">35 min · Activation du bas du corps · Force</div>
+    </div>
+  </div>
+  <div class="exercise-list">
+    <div class="exercise-item">
+      <div><div class="exercise-name">Échauffement — Mobilité hanches</div><div class="exercise-tip">Cercles de hanches, fente basse, marche sur place — 5 min</div></div>
+      <div class="exercise-sets"><div class="sets-main">5 min</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Hip Thrust (au sol avec poids)</div><div class="exercise-tip">Épaules sur canapé/banc, poussez le bassin vers le haut, contractez fort en haut</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 15</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Sumo Squat</div><div class="exercise-tip">Pieds écartés, pointes vers l'extérieur, descente lente 3 secondes</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 12</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Good Morning (haltères)</div><div class="exercise-tip">Dos droit, légère flexion des genoux, penchez le buste — étirement des ischios</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 12</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Donkey Kicks (à 4 pattes)</div><div class="exercise-tip">Dos plat, genou à 90°, poussez le talon vers le plafond — contractez 1s en haut</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 20/côté</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Pont fessier + abduction</div><div class="exercise-tip">Élastique au-dessus des genoux, bridge + ouverture des genoux en haut</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 15</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Séance B -->
+<div class="workout-section">
+  <div class="workout-header">
+    <div class="workout-icon">🔥</div>
+    <div>
+      <div class="workout-title">Séance B — Abdos & Ceinture abdominale</div>
+      <div class="workout-meta">35 min · Gainage profond · Brûleur de gras</div>
+    </div>
+  </div>
+  <div class="exercise-list">
+    <div class="exercise-item">
+      <div><div class="exercise-name">Gainage frontal (Planche)</div><div class="exercise-tip">Corps droit comme une planche, pas de cambrure, respiration régulière</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 40s</div><div class="sets-rest">Repos 30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Crunch bicycle</div><div class="exercise-tip">Rotation contrôlée, coude vers genou opposé, ne tirez pas sur la nuque</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 20 reps</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Leg Raise</div><div class="exercise-tip">Allongée, jambes tendues, remontez sans balancer. Contrôle total</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 12</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Dead Bug</div><div class="exercise-tip">Bras en l'air, jambe opposée tendue vers sol — dos collé au sol en permanence</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 10/côté</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Mountain Climbers</div><div class="exercise-tip">Mains sous les épaules, ramenez chaque genou vers la poitrine rapidement</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 30s</div><div class="sets-rest">Repos 30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Gainage latéral</div><div class="exercise-tip">Corps bien aligné sur le côté, hanche levée. Option : abduction du bras libre</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 30s/côté</div><div class="sets-rest">Repos 30s</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Séance C -->
+<div class="workout-section">
+  <div class="workout-header">
+    <div class="workout-icon">🦵</div>
+    <div>
+      <div class="workout-title">Séance C — Quadriceps & Face interne</div>
+      <div class="workout-meta">40 min · Galbe des cuisses · Tonification</div>
+    </div>
+  </div>
+  <div class="exercise-list">
+    <div class="exercise-item">
+      <div><div class="exercise-name">Squat classique</div><div class="exercise-tip">Pieds à largeur d'épaules, genoux dans l'axe des pieds, dos droit</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 15</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Fentes arrière alternées</div><div class="exercise-tip">Grand pas en arrière, genou avant ne dépasse pas la pointe du pied</div></div>
+      <div class="exercise-sets"><div class="sets-main">4 × 12/jambe</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Wall Sit (chaise murale)</div><div class="exercise-tip">Dos contre le mur, cuisses parallèles au sol — brûlure garantie !</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 45s</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Adduction couchée (élastique)</div><div class="exercise-tip">Allongée sur le côté, jambe du dessous remonte contre la résistance</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 20/côté</div><div class="sets-rest">Repos 45s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Step-up sur chaise</div><div class="exercise-tip">Montez et descendez lentement, contrôlez la jambe qui travaille</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 12/jambe</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">Squat sauté (Jump Squat) → optionnel</div><div class="exercise-tip">Si énergie suffisante. Atterrissage silencieux, souple.</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 × 8</div><div class="sets-rest">Repos 60s</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Séance D -->
+<div class="workout-section">
+  <div class="workout-header">
+    <div class="workout-icon">⚡</div>
+    <div>
+      <div class="workout-title">Séance D — Full Lower Body + Cardio HIIT</div>
+      <div class="workout-meta">40 min · Brûlage calories · Endurance musculaire</div>
+    </div>
+  </div>
+  <div class="exercise-list">
+    <div class="exercise-item">
+      <div><div class="exercise-name">Circuit HIIT (3 tours)</div><div class="exercise-tip">30s de travail / 20s de repos entre chaque exercice · 90s entre les tours</div></div>
+      <div class="exercise-sets"><div class="sets-main">3 tours</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">① Sumo Squat pulse</div><div class="exercise-tip">Descendez en sumo, faites des petits allers-retours bas — 30s non stop</div></div>
+      <div class="exercise-sets"><div class="sets-main">30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">② Hip Thrust explosif</div><div class="exercise-tip">Montée rapide, contraction max en haut, descente contrôlée</div></div>
+      <div class="exercise-sets"><div class="sets-main">30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">③ Mountain Climbers</div><div class="exercise-tip">Rythme soutenu, core bien engagé</div></div>
+      <div class="exercise-sets"><div class="sets-main">30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">④ Glute Bridge + leg extension</div><div class="exercise-tip">Bridge + extension d'une jambe alternée</div></div>
+      <div class="exercise-sets"><div class="sets-main">30s</div></div>
+    </div>
+    <div class="exercise-item">
+      <div><div class="exercise-name">⑤ Crunch + rotation</div><div class="exercise-tip">Coudes vers genou opposé en montant</div></div>
+      <div class="exercise-sets"><div class="sets-main">30s</div></div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- NUTRITION -->
+
+  <div id="nutrition" class="tab-content">
+    <h2 class="section-title">Plan Nutritionnel</h2>
+    <p class="section-sub">Adapté au jeûne · 2 repas + collation nocturne · focus protéines pour préserver le muscle et brûler le gras.</p>
+
+```
+<div class="macros-grid" style="margin-bottom: 32px;">
+  <div class="macro-box">
+    <div class="macro-val">~1600</div>
+    <div class="macro-label">Calories / jour</div>
+  </div>
+  <div class="macro-box">
+    <div class="macro-val">120g</div>
+    <div class="macro-label">Protéines</div>
+  </div>
+  <div class="macro-box">
+    <div class="macro-val">↓ Sucre</div>
+    <div class="macro-label">Sucres rapides</div>
+  </div>
+</div>
+
+<div class="meal-timeline">
+
+  <div class="meal-block">
+    <div class="meal-time">🌅 Suhoor — 1h avant l'azan du Fajr</div>
+    <div class="meal-name">Le repas de la force</div>
+    <div class="meal-card">
+      <ul class="food-list">
+        <li><strong>2 œufs entiers + 1 blanc d'œuf</strong> brouillés ou durs (protéines durables)</li>
+        <li><strong>1 bol de flocons d'avoine</strong> avec eau/lait végétal + 1 cuillère de graines de chia (fibres, énergie lente)</li>
+        <li><strong>1 poignée d'amandes ou noix</strong> (bonnes graisses, satiété)</li>
+        <li><strong>1 yaourt nature 0%</strong> (protéines supplémentaires)</li>
+        <li><strong>1 grand verre d'eau</strong> + 1 verre d'eau citronnée (hydratation)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-time">🌇 Iftar — Rupture du jeûne</div>
+    <div class="meal-name">Rupture douce et progressive</div>
+    <div class="meal-card">
+      <ul class="food-list">
+        <li><strong>3 dattes + grand verre d'eau</strong> — tradition et glycémie stabilisée</li>
+        <li>Attendre 15–20 min avant de manger le reste</li>
+        <li><strong>Soupe légère de légumes</strong> maison (pas de crème)</li>
+        <li><strong>Salade verte</strong> avec huile d'olive + citron</li>
+        <li>Pas de friture, ni bricks, ni harira trop grasse pour la perte de gras</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-time">🌙 Dîner — 1h après l'Iftar (et après la séance)</div>
+    <div class="meal-name">Le repas principal</div>
+    <div class="meal-card">
+      <ul class="food-list">
+        <li><strong>150–200g de protéine maigre</strong> : poulet grillé, dinde, poisson (cabillaud, saumon), thon, kefta maison au four</li>
+        <li><strong>1 portion de glucides complexes</strong> : riz complet, quinoa, lentilles, pois chiches ou patate douce</li>
+        <li><strong>½ assiette de légumes</strong> : courgettes, brocoli, haricots verts, épinards — vapeur ou poêlés avec huile d'olive</li>
+        <li>Huile d'olive, herbes fraîches, épices anti-inflammatoires (curcuma, cumin)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-time">🌛 Collation nocturne — Facultatif (si faim)</div>
+    <div class="meal-name">La collation protéinée</div>
+    <div class="meal-card">
+      <ul class="food-list">
+        <li><strong>1 yaourt nature 0%</strong> avec quelques framboises ou myrtilles</li>
+        <li><strong>OU</strong> 1 œuf dur + concombre</li>
+        <li><strong>OU</strong> 30g d'amandes + 1 carré de chocolat noir 85%</li>
+        <li>Évitez les sucreries, gâteaux, chebakia — sabotage garanti !</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="divider"></div>
+
+<div class="alert">
+  <span class="alert-icon">💧</span>
+  <span class="alert-text"><strong style="color:#c9b8f0">Hydratation cruciale :</strong> Buvez 2,5 à 3L d'eau entre l'Iftar et le Suhoor. Ajoutez une pincée de sel rose de l'Himalaya dans l'eau le soir pour retenir l'hydratation pendant le jeûne. Évitez les boissons sucrées qui coupent la faim sans nourrir.</span>
+</div>
+```
+
+  </div>
+
+  <!-- CONSEILS -->
+
+  <div id="conseils" class="tab-content">
+    <h2 class="section-title">Conseils & Stratégie</h2>
+    <p class="section-sub">Les détails qui font toute la différence en 16 jours.</p>
+
+```
+<div class="tips-grid">
+  <div class="tip-card">
+    <span class="tip-emoji">⏰</span>
+    <div>
+      <div class="tip-title">Timing de l'entraînement</div>
+      <div class="tip-text">S'entraîner 1h30 à 2h après l'Iftar est le sweet spot : glycémie stabilisée, corps hydraté, muscles alimentés. Évitez de vous entraîner juste avant ou juste après la rupture du jeûne.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">💪</span>
+    <div>
+      <div class="tip-title">Intensité adaptée au Ramadan</div>
+      <div class="tip-text">Ne cherchez pas à battre vos records. L'objectif est de maintenir la masse musculaire et brûler du gras. Priorisez la qualité du mouvement sur les kilos soulevés. Si vous êtes épuisée, raccourcissez la séance — ne la sautez pas.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">🛌</span>
+    <div>
+      <div class="tip-title">Sommeil = résultats</div>
+      <div class="tip-text">Votre corps sculpte le muscle et brûle le gras la nuit. Dormez au moins 7h. Si vous vous levez pour le Suhoor, essayez de vous recoucher 1h après. Un manque de sommeil augmente le cortisol et fait stocker le gras abdominal.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">🚫</span>
+    <div>
+      <div class="tip-title">Ce qui sabote les résultats</div>
+      <div class="tip-text">Friture à l'Iftar, bricks, chebakia, sodas sucrés, gâteaux nocturnes. Ces aliments créent un pic d'insuline qui bloque la combustion des graisses pendant les heures suivantes. Une bonne règle : si vous ne le mangeriez pas en dehors du Ramadan, ne le mangez pas maintenant.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">📏</span>
+    <div>
+      <div class="tip-title">Mesurer les progrès</div>
+      <div class="tip-text">Ne vous pesez pas chaque jour — le poids fluctue. Mesurez votre tour de taille (au nombril) et vos hanches tous les 4–5 jours. Prenez une photo de face et de côté à J1 et à J16. Les photos ne mentent pas.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">🧘</span>
+    <div>
+      <div class="tip-title">Étirements & récupération</div>
+      <div class="tip-text">5 min d'étirements après chaque séance. Les jours de repos, faites 20 min de marche légère (avant ou après l'Iftar). Cela active la circulation et accélère la récupération sans fatiguer le corps.</div>
+    </div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-emoji">🌟</span>
+    <div>
+      <div class="tip-title">Mindset : 16 jours c'est court</div>
+      <div class="tip-text">4 séances × 4 semaines = des résultats visibles. Soyez régulière plutôt que parfaite. Rater une séance n'efface pas les progrès. Ce qui compte : la continuité sur 16 jours. Votre corps se souvient de tout ce que vous faites pour lui.</div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+</div>
+
+<script>
+  // Generate schedule
+  const days = [
+    { label: 'Lun', type: 'A', title: 'Fessiers & Ischios', focus: 'Séance A — Renforcement bas du corps' },
+    { label: 'Mar', type: 'B', title: 'Abdos & Gainage', focus: 'Séance B — Core profond' },
+    { label: 'Mer', type: 'rest', title: 'Repos actif', focus: 'Marche légère 20 min + étirements' },
+    { label: 'Jeu', type: 'C', title: 'Quadriceps & Face interne', focus: 'Séance C — Galbe des cuisses' },
+    { label: 'Ven', type: 'D', title: 'Full Body + HIIT', focus: 'Séance D — Circuit cardio muscu' },
+    { label: 'Sam', type: 'rest', title: 'Repos actif', focus: 'Marche légère 20 min + étirements' },
+    { label: 'Dim', type: 'A', title: 'Fessiers & Ischios', focus: 'Séance A — Renforcement bas du corps' },
+    { label: 'Lun', type: 'B', title: 'Abdos & Gainage', focus: 'Séance B — Core profond' },
+    { label: 'Mar', type: 'rest', title: 'Repos actif', focus: 'Marche légère 20 min + étirements' },
+    { label: 'Mer', type: 'C', title: 'Quadriceps & Face interne', focus: 'Séance C — Galbe des cuisses' },
+    { label: 'Jeu', type: 'D', title: 'Full Body + HIIT', focus: 'Séance D — Circuit cardio muscu' },
+    { label: 'Ven', type: 'rest', title: 'Repos actif', focus: 'Marche légère 20 min + étirements' },
+    { label: 'Sam', type: 'A', title: 'Fessiers & Ischios', focus: 'Séance A — Renforcement bas du corps' },
+    { label: 'Dim', type: 'B', title: 'Abdos & Gainage', focus: 'Séance B — Core profond' },
+    { label: 'Lun', type: 'C', title: 'Quadriceps & Face interne', focus: 'Séance C — Galbe des cuisses' },
+    { label: 'Mar', type: 'D', title: 'Full Body + HIIT', focus: 'Séance D — Final push 💪' },
+  ];
+
+  const schedule = document.getElementById('schedule');
+  days.forEach((d, i) => {
+    const isRest = d.type === 'rest';
+    schedule.innerHTML += `
+      <div class="day-card ${isRest ? 'rest' : ''}">
+        <div class="day-num">${String(i+1).padStart(2,'0')}</div>
+        <div class="day-info">
+          <div class="day-label">${d.label}</div>
+          <div class="day-title">${d.title}</div>
+          <div class="day-focus">${d.focus}</div>
+        </div>
+        <div class="day-tag ${isRest ? 'tag-rest' : 'tag-train'}">${isRest ? 'Repos' : 'Séance ' + d.type}</div>
+      </div>
+    `;
+  });
+
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
